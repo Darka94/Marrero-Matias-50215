@@ -1,0 +1,65 @@
+
+{% extends "web/home.html" %}
+{# Cargamos la librería #}
+{% load django_bootstrap5 %}
+{# Widget Tweaks #}
+{% load widget_tweaks %}
+{# Archivos #}
+{% load static %}
+
+    
+{% block body %}
+<div align ="left" class="btn_crear mb-3">
+    <a href="crear" type="button" class="btn btn-primary">Crear</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'jugos' y los listamos -->
+            {% for categoria in object_list %}
+            <tr>
+                <td>{{ categoria.nombre }}</td>
+                <td>
+                    <!-- Usaremos un formulario que realizará la tarea de eliminar un registro o jugo desde la misma tabla HTML -->
+                    <form method="POST" action="eliminar/{{ categoria.id }}">
+                        {% csrf_token %}
+                        <div class="btn-group">
+                            <!-- Creamos 3 botones que son ver, Editar y Eliminar, nos sirven para gestionar nuestros registros o jugos -->
+                            <a href="detalle/{{categoria.pk }}" title="Ver" class="btn btn-success">Ver</a>
+                            <a href="editar/{{categoria.pk }}" title="Editar" type="button" class="btn btn-primary">Editar</a>
+
+                            <button class="btn btn-danger" onclick="return eliminar();" type="submit">Eliminar</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+ 
+    function eliminar() {
+      var x = confirm("Eliminar categoria ?");
+      if (x)
+        return true;
+      else
+        return false;
+    }
+
+  </script>
+  {% if messages %}
+  <ul class="messages list-group mb-3">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-primary"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock body %}

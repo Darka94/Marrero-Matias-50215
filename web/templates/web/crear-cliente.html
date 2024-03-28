@@ -1,0 +1,30 @@
+{% extends "web/home.html" %}
+{# Cargamos la librería #}
+{% load django_bootstrap5 %}
+{# Widget Tweaks #}
+{% load widget_tweaks %}
+{# Archivos #}
+{% load static %}
+{% block body %}
+<form method="post" enctype="multipart/form-data">
+  
+   
+    {% csrf_token %}
+    
+    <!-- {{ form.as_p }} -->
+    <div class="form-group mb-2">
+      <label for="nombre" class="txt_negrita">Nombre</label>
+      {{ form.nombre|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+    </div>
+    <div class="form-group mb-2">
+      <label for="precio" class="txt_negrita">Email</label>
+      {{ form.email|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto --> 
+    </div>
+    
+    
+    <button href="{ % url 'crear' % }" type="submit" class="btn btn-primary">Aceptar</button>
+    <a href="./" type="submit" class="btn btn-primary">Cancelar</a>
+   
+  </form>
+
+  {% endblock body %}

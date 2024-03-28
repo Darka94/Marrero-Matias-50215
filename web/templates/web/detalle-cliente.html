@@ -1,0 +1,19 @@
+
+{% extends "web/home.html" %}
+{# Cargamos la librería #}
+{% load django_bootstrap5 %}
+{# Widget Tweaks #}
+{% load widget_tweaks %}
+{# Archivos #}
+{% load static %}
+{% block body %}
+
+<h4>Detalles</h4>
+ 
+<p><span class="txt_negrita">Nombre:</span> <br> {{object.nombre}}</p>
+<p><span class="txt_negrita">email:</span> <br> {{object.email}}</p>
+
+<!-- Botón para volver a la vista principal (Home) -->
+<a href="{% url 'leer-cliente' %}" type="submit" class="btn btn-primary">Volver</a>
+
+{% endblock body %}

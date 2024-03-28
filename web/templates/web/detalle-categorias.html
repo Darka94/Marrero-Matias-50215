@@ -1,0 +1,18 @@
+
+{% extends "web/home.html" %}
+{# Cargamos la librería #}
+{% load django_bootstrap5 %}
+{# Widget Tweaks #}
+{% load widget_tweaks %}
+{# Archivos #}
+{% load static %}
+{% block body %}
+
+<h4>Detalles</h4>
+ 
+<p><span class="txt_negrita">Nombre:</span> <br> {{object.nombre}}</p>
+
+<!-- Botón para volver a la vista principal (Home) -->
+<a href="{% url 'leer-categorias' %}" type="submit" class="btn btn-primary">Volver</a>
+
+{% endblock body %}

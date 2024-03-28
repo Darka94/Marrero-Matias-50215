@@ -1,0 +1,17 @@
+{% extends "web/home.html" %}
+{# Cargamos la librería #}
+{% load django_bootstrap5 %}
+{# Widget Tweaks #}
+{% load widget_tweaks %}
+{# Archivos #}
+{% load static %}
+
+{% block body %}
+  <h2>Actualizar Categoria</h2>
+  
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Actualizar cateogria</button>
+  </form>
+{% endblock body %}
