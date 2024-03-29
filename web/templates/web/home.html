@@ -83,13 +83,15 @@
     <nav >
                 <a class="navbar-brand" href= "{% url 'home' %}">Home</a>
                 <a class="navbar-brand" href="{% url 'leer' %}">Productos</a>
+                <a class="navbar-brand" href="{% url 'sobre_mi' %}">Sobre mí</a>
+                <a class="navbar-brand" href="{% url 'contacto' %}">Contacto</a> 
             {% if user.is_authenticated %}  
                 
                 <a class="navbar-brand" href="{% url 'leer-cliente' %}">Clientes</a>
                 <a class="navbar-brand" href="{% url 'leer-categorias' %}">Categoria</a>
                 <a class="navbar-brand" href="{% url 'leer-pedidos' %}">Pedidos</a>
                 <a class="navbar-brand" href="{% url 'sobre_mi' %}">Sobre mí</a>
-                <a class="navbar-brand" href="{% url 'contacto' %}">Contacto</a>             
+                <a class="navbar-brand" href="{% url 'perfil' %}">Perfil</a>
                 <p style="color:green">[{{user.username}}]</p>
                 <div class="text-center">
                     <a  href="{% url 'agregar_avatar' %}" ><img src="{{ request.session.avatar }}" height="40px" weight="40px"/></a>
@@ -99,7 +101,8 @@
                     {% csrf_token %}
                     <button type="submit">Cerrar sesión</button>
                 </form>                 
-                <button  href="{% url 'perfil' %}">Perfil</button> 
+                
+
             
             
             {% else %}

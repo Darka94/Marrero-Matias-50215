@@ -18,10 +18,9 @@ class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True)   
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirma Contraseña", widget=forms.PasswordInput)
-    avatar = forms.ImageField(required=True)  # Campo de imagen para el avatar
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2",'avatar']
+        fields = ["username", "email", "password1", "password2"]
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
