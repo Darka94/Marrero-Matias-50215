@@ -1,0 +1,58 @@
+﻿{% extends "web/home.html" %}
+{% load django_bootstrap5 %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block body %}
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+        font-family: 'Arial', sans-serif; /* Fuente agradable */
+    }
+</style>
+<div class="container mt-5">
+    <h2>Contacto</h2>
+    <form id="contactForm" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    <div id="successMessage" class="mt-3" style="display: none;">
+        <div class="alert alert-success" role="alert">
+            ¡El mensaje ha sido enviado correctamente!
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+
+        // Simular el envío del formulario (aquí es donde enviarías los datos a tu servidor)
+        // Aquí puedes agregar código AJAX para enviar los datos al servidor
+        setTimeout(function() {
+            // Mostrar el mensaje de éxito y limpiar el formulario después de un breve retraso (simulado)
+            successMessage.style.display = 'block';
+            form.reset();
+        }, 1000);
+    });
+});
+</script>
+{% endblock body %}

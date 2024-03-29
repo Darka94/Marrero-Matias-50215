@@ -5,6 +5,8 @@ from .forms import *
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from search_views.search import SearchListView
+from search_views.filters import BaseFilter
 # Nos sirve para redireccionar despues de una acción revertiendo patrones de expresiones regulares 
 from django.urls import reverse
 # Habilitamos el uso de mensajes en Django
@@ -26,14 +28,30 @@ from django.contrib.auth.decorators import login_required
 #Menu Principal
 def home(request):
     return render(request, "web/home.html") 
+def contacto(request):
+    return render(request, "web/contacto.html") 
+def sobre_mi(request):
+    return render(request, "web/sobre_mi.html") 
+
 
 #__________________________________________________________________________
+
+#Buscar Producto
+class ProductosFilter(BaseFilter):
+    search_fields = {
+        'search_text': ['nombre'],
+        'search_precio_exact': {'operator': '__exact', 'fields': ['precio']},
+        'search_precio_min': {'operator': '__gte', 'fields': ['precio']},
+        'search_precio_max': {'operator': '__lte', 'fields': ['precio']},
+    }
 #CRUD Producto
-
-class ListarProducto(LoginRequiredMixin,ListView): 
+class ListarProducto(SearchListView):
     model = Producto
+    paginate_by = 30
+    template_name = "web/productos.html"
+    form_class = ProductoSearchForm
+    filter_class = ProductosFilter
     
-
 class CrearProducto(LoginRequiredMixin,SuccessMessageMixin, CreateView): 
     model = Producto # Llamamos a la clase 'Producto' que se encuentra en nuestro archivo 'models.py'
     form = Producto # Definimos nuestro formulario con el nombre de la clase o modelo 'Producto'
@@ -68,7 +86,10 @@ class EliminarProducto(LoginRequiredMixin,SuccessMessageMixin, DeleteView):
         success_message = 'Producto Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Producto
         messages.success (self.request, (success_message))       
         return reverse('leer') # Redireccionamos a la vista principal 'leer'
-    
+
+
+
+
 #CRUD Cliente
 
 class ListarCliente(LoginRequiredMixin,ListView): 

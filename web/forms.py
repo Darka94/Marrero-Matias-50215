@@ -49,3 +49,8 @@ class AvatarForm(forms.ModelForm):
         model = Avatar
         fields= ['imagen', 'user']
     
+    
+from django import forms
+
+class ProductoSearchForm(forms.Form):
+    search_text = forms.CharField(label='Buscar', max_length=100, required=False)
