@@ -68,7 +68,7 @@ acceder a la carpeta del proyecto (donde se encuentra el archivo migrate.py) des
 
 ## Demo
 
-- Video "Demo-Coder-Matias.zip"
+- Video "Demo-Coder-Matias.rar"
 - Casos de test.xlsx
 ## Used By
 
