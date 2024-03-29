@@ -154,11 +154,13 @@
     {% endblock body %}
     <!-- Footer -->
     <footer>
-        <a href="#productos">Productos</a>
-        <a href="#clientes">Clientes</a>
-        <a href="#pedidos">Pedidos</a>
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#contacto">Contacto</a>
+        <a class="navbar-brand" href= "{% url 'home' %}">Home</a>
+        <a class="navbar-brand" href="{% url 'leer' %}">Productos</a>
+        <a class="navbar-brand" href="{% url 'leer-cliente' %}">Clientes</a>
+        <a class="navbar-brand" href="{% url 'leer-categorias' %}">Categoria</a>
+        <a class="navbar-brand" href="{% url 'leer-pedidos' %}">Pedidos</a>
+        <a class="navbar-brand" href="{% url 'sobre_mi' %}">Sobre mí</a>
+        <a class="navbar-brand" href="{% url 'contacto' %}">Contacto</a> 
     </footer>
 </body>
 </html>
