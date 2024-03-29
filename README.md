@@ -55,7 +55,7 @@ Para realizar el Deployment de manera local el usuario deberá ejecutar los sigu
 #### Paso 1
 ```bash
   - git-clone https://github.com/Darka94/Marrero-Matias-50215/tree/master
-  - pip install -m requeriment.txt
+  - pip install -r requeriment.txt
 ```
 #### Paso 2
 

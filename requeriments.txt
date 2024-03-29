@@ -1,5 +1,4 @@
-pip install django==5.0.3
-
+django==5.0.3
 django-bootstrap5
 django-widget-tweaks
 django-search-views
