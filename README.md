@@ -16,6 +16,16 @@ A continuación se describira el funcionamiento de una aplicación web creada po
 
 ## FAQ
 
+#### Modelos:
+
+Cliente, Producto, Pedido, Categoria, Avatar
+
+### Usuario administrador para validar el panel:
+
+user: admin
+
+pass: admin
+
 #### ¿Cómo esta integrada la página?:
 
 Consta de un menu principal itegrado por la página de bienvenida Home, Contacto, Sobre mi y Productos (Solo Verlos). Tambien cuenta con la opción de buscar productos en la base de datos. Para este recorrido no es necesario estar logueado.
@@ -51,7 +61,7 @@ Para realizar el Deployment de manera local el usuario deberá ejecutar los sigu
 ## Demo
 
 - Video "Demo-Coder-Matias.zip"
-- Casos de uso.xlsx
+- Casos de test.xlsx
 ## Used By
 
 Este proyecto fue creado con fines educativos para:
