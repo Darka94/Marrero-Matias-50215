@@ -52,11 +52,19 @@ El usuario puede autenticado puede ingresar en el botón "Perfil" y editar sus d
 - Python  Python 3.12.2
 Para realizar el Deployment de manera local el usuario deberá ejecutar los siguientes comandos:
 
-
+#### Paso 1
 ```bash
   - git-clone https://github.com/Darka94/Marrero-Matias-50215/tree/master
   - pip install -m requeriment.txt
 ```
+#### Paso 2
+
+acceder a la carpeta del proyecto (donde se encuentra el archivo migrate.py) desde la consola y ejecutar:
+```bash
+  - python manage.py runserver
+```
+#### Paso 3
+- Ingresar a localhost:8000 y explorar las funcionalidades
 
 ## Demo
 
