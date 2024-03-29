@@ -2,6 +2,8 @@ from django.urls import path, include
 from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
+
 
 urlpatterns = [
 # Menu Principal
@@ -35,7 +37,18 @@ urlpatterns = [
     path('pedidos/crear', CrearPedido.as_view(template_name = "web/crear-pedidos.html"), name='crear-pedidos'),
     path('pedidos/editar/<int:pk>', ActualizarPedido.as_view(template_name = "web/actualizar-pedidos.html"), name='actualizar-pedidos'), 
     path('pedidos/eliminar/<int:pk>', EliminarPedido.as_view(), name='eliminar-pedidos'),
+    
+     #____________________ Login, Logout, Registration
+    path('login/', login_request, name="login"),
+    path('logout/', LogoutView.as_view(template_name="web/logout.html") , name="logout"),
+    path('registrar/', register, name="registrar"),
+
+    #____________________ Edicion Perfil, Cambio de Clave, Avatar
+    path('perfil/', editProfile, name="perfil"),
+    path('<int:pk>/password/', CambiarClave.as_view(), name="cambiar_clave"),
+    path('agregar_avatar/', agregarAvatar, name="agregar_avatar"),
 ]
+
 
 
 # Configuración para archivos multimedia

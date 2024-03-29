@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import ProductoForm
+from .forms import *
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -16,26 +16,25 @@ from django.contrib.messages.views import SuccessMessageMixin
 # Habilitamos los formularios en Django
 from django import forms
 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import PasswordChangeView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 #Menu Principal
 def home(request):
     return render(request, "web/home.html") 
-def productos(request):
-    productos = Producto.objects.all()
-    return render(request, 'web/productos.html', {'producto': productos})
-def categoria(request):
-    categoria = Categoria.objects.all()
-    return render(request, 'web/categoria.html', {'categoria':categoria})
-def cliente(request):
-    cliente = Cliente.objects.all()
-    return render(request, 'web/cliente.html', {'cliente':cliente})
+
 #__________________________________________________________________________
 #CRUD Producto
 
-class ListarProducto(ListView): 
+class ListarProducto(LoginRequiredMixin,ListView): 
     model = Producto
     
 
-class CrearProducto(SuccessMessageMixin, CreateView): 
+class CrearProducto(LoginRequiredMixin,SuccessMessageMixin, CreateView): 
     model = Producto # Llamamos a la clase 'Producto' que se encuentra en nuestro archivo 'models.py'
     form = Producto # Definimos nuestro formulario con el nombre de la clase o modelo 'Producto'
     fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'Producto' de nuestra Base de Datos 
@@ -45,11 +44,11 @@ class CrearProducto(SuccessMessageMixin, CreateView):
     def get_success_url(self):        
         return reverse('leer') # Redireccionamos a la vista principal 'leer'
 
-class DetalleProducto(DetailView): 
+class DetalleProducto(LoginRequiredMixin,DetailView): 
     model = Producto
 
     
-class ActualizarProducto(SuccessMessageMixin, UpdateView): 
+class ActualizarProducto(LoginRequiredMixin,SuccessMessageMixin, UpdateView): 
     model = Producto # Llamamos a la clase 'Producto' que se encuentra en nuestro archivo 'models.py' 
     form = Producto # Definimos nuestro formulario con el nombre de la clase o modelo 'Producto' 
     fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'Producto' de nuestra Base de Datos 
@@ -59,7 +58,7 @@ class ActualizarProducto(SuccessMessageMixin, UpdateView):
     def get_success_url(self):               
         return reverse('leer') # Redireccionamos a la vista principal 'leer'
     
-class EliminarProducto(SuccessMessageMixin, DeleteView): 
+class EliminarProducto(LoginRequiredMixin,SuccessMessageMixin, DeleteView): 
     model = Producto
     form = Producto
     fields = "__all__"     
@@ -72,12 +71,12 @@ class EliminarProducto(SuccessMessageMixin, DeleteView):
     
 #CRUD Cliente
 
-class ListarCliente(ListView): 
+class ListarCliente(LoginRequiredMixin,ListView): 
     model = Cliente
     
 
 
-class CrearCliente(SuccessMessageMixin, CreateView): 
+class CrearCliente(LoginRequiredMixin,SuccessMessageMixin, CreateView): 
     model = Cliente # Llamamos a la clase 'Producto' que se encuentra en nuestro archivo 'models.py'
     form = Cliente # Definimos nuestro formulario con el nombre de la clase o modelo 'Producto'
     fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'Producto' de nuestra Base de Datos 
@@ -88,11 +87,11 @@ class CrearCliente(SuccessMessageMixin, CreateView):
         return reverse('leer-cliente') # Redireccionamos a la vista principal 'leer'
  
 
-class DetalleCliente(DetailView): 
+class DetalleCliente(LoginRequiredMixin,DetailView): 
     model = Cliente
 
     
-class ActualizarCliente(SuccessMessageMixin, UpdateView): 
+class ActualizarCliente(LoginRequiredMixin,SuccessMessageMixin, UpdateView): 
     model = Cliente 
     form = Cliente  
     fields = "__all__" 
@@ -102,7 +101,7 @@ class ActualizarCliente(SuccessMessageMixin, UpdateView):
     def get_success_url(self):               
         return reverse('leer-cliente') #
     
-class EliminarCliente(SuccessMessageMixin, DeleteView): 
+class EliminarCliente(LoginRequiredMixin,SuccessMessageMixin, DeleteView): 
     model = Cliente
     form = Cliente
     fields = "__all__"     
@@ -116,12 +115,12 @@ class EliminarCliente(SuccessMessageMixin, DeleteView):
     
 #CRUD Categoria
 
-class ListarCategoria(ListView): 
+class ListarCategoria(LoginRequiredMixin,ListView): 
     model = Categoria
     
 
 
-class CrearCategoria(SuccessMessageMixin, CreateView): 
+class CrearCategoria(LoginRequiredMixin,SuccessMessageMixin, CreateView): 
     model = Categoria 
     form = Categoria 
     fields = "__all__" 
@@ -132,11 +131,11 @@ class CrearCategoria(SuccessMessageMixin, CreateView):
         return reverse('leer-categorias') # Redireccionamos a la vista principal 'leer'
  
 
-class DetalleCategoria(DetailView): 
+class DetalleCategoria(LoginRequiredMixin,DetailView): 
     model = Categoria
 
     
-class ActualizarCategoria(SuccessMessageMixin, UpdateView): 
+class ActualizarCategoria(LoginRequiredMixin,SuccessMessageMixin, UpdateView): 
     model = Categoria 
     form = Categoria  
     fields = "__all__" 
@@ -146,7 +145,7 @@ class ActualizarCategoria(SuccessMessageMixin, UpdateView):
     def get_success_url(self):               
         return reverse('leer-categorias') 
     
-class EliminarCategoria(SuccessMessageMixin, DeleteView): 
+class EliminarCategoria(LoginRequiredMixin,SuccessMessageMixin, DeleteView): 
     model = Categoria
     form = Categoria
     fields = "__all__"     
@@ -159,12 +158,12 @@ class EliminarCategoria(SuccessMessageMixin, DeleteView):
     
 #CRUD Pedidos
 
-class ListarPedido(ListView): 
+class ListarPedido(LoginRequiredMixin,ListView): 
     model = Pedido
     
 
 
-class CrearPedido(SuccessMessageMixin, CreateView): 
+class CrearPedido(LoginRequiredMixin,SuccessMessageMixin, CreateView): 
     model = Pedido 
     form = Pedido 
     fields = "__all__" 
@@ -175,11 +174,11 @@ class CrearPedido(SuccessMessageMixin, CreateView):
         return reverse('leer-pedidos') # Redireccionamos a la vista principal 'leer'
  
 
-class DetallePedido(DetailView): 
+class DetallePedido(LoginRequiredMixin,DetailView): 
     model = Pedido
 
     
-class ActualizarPedido(SuccessMessageMixin, UpdateView): 
+class ActualizarPedido(LoginRequiredMixin,SuccessMessageMixin, UpdateView): 
     model = Pedido 
     form = Pedido  
     fields = "__all__" 
@@ -189,7 +188,7 @@ class ActualizarPedido(SuccessMessageMixin, UpdateView):
     def get_success_url(self):               
         return reverse('leer-pedidos') 
     
-class EliminarPedido(SuccessMessageMixin, DeleteView): 
+class EliminarPedido(LoginRequiredMixin,SuccessMessageMixin, DeleteView): 
     model = Pedido
     form = Pedido
     fields = "__all__"     
@@ -199,3 +198,88 @@ class EliminarPedido(SuccessMessageMixin, DeleteView):
         success_message = 'Pedido Eliminado Correctamente !' 
         messages.success (self.request, (success_message))       
         return reverse('leer-pedidos') 
+    
+#------------Login, Logout, Authentication, Registration--------------------#
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+
+            try:
+                avatar_url = Avatar.objects.get(user=request.user).imagen.url
+            except Avatar.DoesNotExist:
+                avatar_url = "/media/avatares/default.png"
+
+            return render(request, "web/home.html", {"avatar_url": avatar_url})
+        else:
+            return redirect(reverse_lazy('login'))
+    else:
+        form = AuthenticationForm()
+    return render(request, "web/login.html", {"form": form})
+
+
+def register(request):
+    if request.method == "POST":
+        miForm = RegistroForm(request.POST)
+
+        if miForm.is_valid():
+            usuario = miForm.cleaned_data.get("username")
+            miForm.save()
+            return redirect(reverse_lazy('home'))
+    else:
+    #Si ingresa en el else es la primera vez 
+        miForm = RegistroForm()
+
+    return render(request, "web/registro.html", {"form": miForm} )  
+
+#Edición de Perfil, Cambio Clave, Avatar
+
+@login_required
+def editProfile(request):
+    usuario = request.user
+    if request.method == "POST":
+        miForm = UserEditForm(request.POST)
+        if miForm.is_valid():
+            user = User.objects.get(username=usuario)
+            user.email = miForm.cleaned_data.get("email")
+            user.first_name = miForm.cleaned_data.get("first_name")
+            user.last_name = miForm.cleaned_data.get("last_name")
+            user.save()
+            return redirect(reverse_lazy('home'))
+    else:
+    # __ Si ingresa en el else es la primera vez 
+        miForm = UserEditForm(instance=usuario)
+
+    return render(request, "web/editarPerfil.html", {"form": miForm} )    
+   
+class CambiarClave(LoginRequiredMixin, PasswordChangeView):
+    template_name = "web/cambiar_clave.html"
+    success_url = reverse_lazy("home")
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        miForm = AvatarForm(request.POST, request.FILES)
+
+        if miForm.is_valid():
+            usuario = User.objects.get(username=request.user)
+            #___ Borrar avatares viejos
+            avatarViejo = Avatar.objects.filter(user=usuario)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            #____________________________________________________
+            avatar = Avatar(user=usuario,
+                            imagen=miForm.cleaned_data["imagen"])
+            avatar.save()
+            imagen = Avatar.objects.get(user=usuario).imagen.url
+            request.session["avatar"] = imagen
+            
+            return redirect(reverse_lazy('home'))
+    else:
+    # __ Si ingresa en el else es la primera vez 
+        miForm = AvatarForm()
+
+    return render(request, "web/agregarAvatar.html", {"form": miForm} ) 

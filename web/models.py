@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
@@ -36,3 +38,10 @@ class Pedido(models.Model):
     fecha_pedido = models.DateField()
     def __str__(self):
         return f"{self.cliente} - ${self.fecha_pedido}"
+    
+class Avatar(models.Model):
+    imagen = models.ImageField(upload_to="avatares")   
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} {self.imagen}"

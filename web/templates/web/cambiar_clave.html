@@ -1,0 +1,53 @@
+{% extends "web/home.html" %}
+{% block body %}
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+        font-family: 'Roboto', sans-serif; /* Fuente linda */
+    }
+
+    .container {
+        text-align: center; /* Centrado del contenido */
+    }
+
+    form {
+        margin: 0 auto; /* Centrado horizontal del formulario */
+        max-width: 500px; /* Ancho máximo del formulario */
+    }
+
+    form label {
+        color: #fff; /* Color blanco para las etiquetas del formulario */
+    }
+
+    .invalid-feedback {
+        color: #fff !important; /* Color blanco para los mensajes de error */
+    }
+
+    input[type="submit"] {
+        margin-top: 20px; /* Espacio arriba del botón */
+        background-color: #007bff; /* Color de fondo del botón */
+        color: #fff; /* Color del texto del botón */
+        border: none; /* Sin borde */
+        padding: 10px 20px; /* Espaciado interno del botón */
+        font-size: 16px; /* Tamaño de fuente del botón */
+        cursor: pointer; /* Cambio de cursor al pasar sobre el botón */
+        transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3; /* Cambio de color de fondo al pasar sobre el botón */
+    }
+</style>
+
+<div class="container py-4">
+    <h1 class="mb-5">Cambiar Contraseña</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Cambiar">
+    </form>
+</div>
+{% endblock body %}

@@ -12,16 +12,9 @@
             font-family: 'Roboto Condensed', sans-serif; /* Cambio de la tipografía a Roboto Condensed */
             margin: 0;
             padding: 0;
-            
-            {% block back %}
-                
-           
-                
             background-image: url('https://img.freepik.com/vector-gratis/fondo-circulos-tonos-oscuros_60389-166.jpg?w=900&t=st=1711641316~exp=1711641916~hmac=e82048025e37e9219f1ec723f3789cc03810003bf0cb48e636d13ef29a50a3b3'); /* Imagen de fondo */
-            
             background-size: cover; /* Ajusta la imagen de fondo para cubrir toda la página */
             background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
-            {% endblock back %}
         }
 
         nav, footer {
@@ -30,6 +23,8 @@
             padding: 10px 20px;
             display: flex;
             justify-content: space-around;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         nav a, footer a {
@@ -40,11 +35,15 @@
         section {
             padding: 20px;
             text-align: center;
+            color: white;
         }
 
         img {
             max-width: 100%;
             height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         video {
@@ -52,6 +51,9 @@
             max-width: 800px;
             height: auto;
             margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         footer {
@@ -71,35 +73,51 @@
             color: #f0f0f0;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% load django_bootstrap5 %}
+
 </head>
 <body>
     <!-- Menú de navegación -->
-    <nav>
-        <a href= "{% url 'home' %}">Home</a>
-        <a href="{% url 'leer' %}">Productos</a>
-        <a href="{% url 'leer-cliente' %}">Clientes</a>
-        <a href="{% url 'leer-categorias' %}">Categoria</a>
-        <a href="{% url 'leer-pedidos' %}">Pedidos</a>
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#contacto">Login</a>
-        <a href="#contacto">Registro</a>
-    </nav>
-
-{% block body %}
-    
-    
+                  
+    <nav class="navbar navbar-light bg-light static-top">
+                <a class="navbar-brand" href= "{% url 'home' %}">Home</a>
+            {% if user.is_authenticated %}  
+                <a class="navbar-brand" href="{% url 'leer' %}">Productos</a>
+                <a class="navbar-brand" href="{% url 'leer-cliente' %}">Clientes</a>
+                <a class="navbar-brand" href="{% url 'leer-categorias' %}">Categoria</a>
+                <a class="navbar-brand" href="{% url 'leer-pedidos' %}">Pedidos</a>
+                <a class="navbar-brand" href="#sobre-mi">Sobre mí</a>
+                <a class="navbar-brand" href="#contacto">Contacto</a>
+                <p style="color:green">[{{user.username}}]</p>
+                <div class="text-center">
+                    <a  href="{% url 'agregar_avatar' %}" ><img src="{{ request.session.avatar }}" height="40px" weight="40px"/></a>
+                </div>      
+                <form id="logout-form" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>                 
+                <a class="btn btn-success" href="{% url 'perfil' %}">Perfil</a>  
+            
+            {% else %}
+        
+                <a class="btn btn-primary" href="{% url 'login' %}">Login</a> 
+                <a class="btn btn-success" href="{% url 'registrar' %}">Registrarse</a> 
+            
+            {% endif %} 
+    </nav>               
+    {% block body %}
     <!-- Contenido de la página -->
     <section id="inicio">
         <!-- Imagen -->
         <img src="https://www.lafragua.run/wp-content/uploads/2019/09/CrossFit-Lo-que-tienes-que-saber-si-vas-a-empezar-comenzar-a-practicarlo-1068x601.jpg" alt="Descripción de la imagen">
 
         <!-- Título y texto -->
-        <h2 style="color: white;">¡Descubre el Mejor Equipo de Crossfit!</h2>
-        <p style="color: white;">Bienvenido a nuestra tienda de equipamiento de Crossfit. Encuentra lo que necesitas para mejorar tu forma física y alcanzar tus metas de fuerza y resistencia.</p>
+        <h2>¡Descubre el Mejor Equipo de Crossfit!</h2>
+        <p>Bienvenido a nuestra tienda de equipamiento de Crossfit. Encuentra lo que necesitas para mejorar tu forma física y alcanzar tus metas de fuerza y resistencia.</p>
 
         <!-- Botón -->
-        <button>Explora Ahora</button>
+        <a class="btn btn-primary" href="{% url 'leer' %}">Explora Ahora!</a> 
     </section>
 
     <!-- Video -->
@@ -108,8 +126,7 @@
             <source src="https://www.crossfit.com/wp-content/uploads/2022/10/08131145/16x9_CrossFit-Games-Website-Slider_5MB.mp4" type="video/mp4">
             Tu navegador no soporta el elemento de video.
         </video>
-        <h2 style="color: white;">"Encuentra tu fuerza interior, desafía tus límites y alcanza nuevas alturas. En cada repetición, en cada esfuerzo, descubre el poder que reside dentro de ti. ¡Inspírate, persevera y conquista!"</h2>
-
+        <h2>"Encuentra tu fuerza interior, desafía tus límites y alcanza nuevas alturas. En cada repetición, en cada esfuerzo, descubre el poder que reside dentro de ti. ¡Inspírate, persevera y conquista!"</h2>
     </section>
 
     <section id="productos">
@@ -132,15 +149,13 @@
         <!-- Contenido de la sección de contacto -->
     </section>
     {% endblock body %}
-
-     <!-- Footer -->
-     <footer>
+    <!-- Footer -->
+    <footer>
         <a href="#productos">Productos</a>
         <a href="#clientes">Clientes</a>
         <a href="#pedidos">Pedidos</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#contacto">Contacto</a>
-        
     </footer>
 </body>
 </html>

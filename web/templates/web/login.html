@@ -1,0 +1,39 @@
+{% extends "web/home.html" %}
+{% load django_bootstrap5 %}
+{% block body %}
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+        font-family: 'Roboto', sans-serif; /* Fuente linda */
+    }
+    h1 {
+        text-align: center; /* Centrar el título */
+    }
+    form {
+        width: 50%; /* Ancho del formulario */
+        margin: 0 auto; /* Centrar el formulario horizontalmente */
+    }
+    table {
+        width: 100%; /* Ancho de la tabla */
+    }
+    th, td {
+        text-align: left; /* Alinear los campos de la tabla a la izquierda */
+        padding: 10px; /* Espaciado interno */
+    }
+    input[type="submit"] {
+        display: block; /* Mostrar el botón de enviar como bloque */
+        margin: 20px auto 0; /* Centrar el botón horizontalmente y agregar espacio superior */
+    }
+</style>
+
+<h1 class="mb-5">Login</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock body %}

@@ -1,26 +1,33 @@
-
 {% extends "web/home.html" %}
-{# Cargamos la librería #}
 {% load django_bootstrap5 %}
-{# Widget Tweaks #}
 {% load widget_tweaks %}
-{# Archivos #}
 {% load static %}
 {% block body %}
-
-<h4>Detalles</h4>
+<style>
+    .txt_negrita {
+      color: #fff; /* Color blanco para el texto */
+    }
+    .centered {
+      text-align: center; /* Centrar el contenido */
+    }
+</style>
+<div class="container py-4">
+  <h4 class="text-center mb-4">Detalles</h4>
  
-<p><span class="txt_negrita">Nombre:</span> <br> {{object.nombre}}</p>
-<p><span class="txt_negrita">Precio:</span> <br> {{object.precio}}</p>
-<p><span class="txt_negrita">Categoria:</span> <br> {{object.categoria}}</p>
-<p>
-    <span class="txt_negrita">Imagen:</span> <br>
-    <img src="{{ object.imagen_url }}" alt="{{ object.nombre }}" class="img-fluid">
-</p>
-<p><span class="txt_negrita">Creado:</span> <br> {{object.created_at}}</p>
-<p><span class="txt_negrita">Actualizado:</span> <br> {{object.updated_at}}</p>
- 
-<!-- Botón para volver a la vista principal (Home) -->
-<a href="{% url 'leer' %}" type="submit" class="btn btn-primary">Volver</a>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p><span class="txt_negrita">Nombre:</span><br>{{ object.nombre }}</p>
+      <p><span class="txt_negrita">Precio:</span><br>{{ object.precio }}</p>
+      <p><span class="txt_negrita">Categoría:</span><br>{{ object.categoria }}</p>
+      <p><span class="txt_negrita">Imagen:</span><br><img src="{{ object.imagen_url }}" alt="{{ object.nombre }}" class="img-fluid"></p>
+      <p><span class="txt_negrita">Creado:</span><br>{{ object.created_at }}</p>
+      <p><span class="txt_negrita">Actualizado:</span><br>{{ object.updated_at }}</p>
+    </div>
+  </div>
 
+  <!-- Botón para volver a la vista principal (Home) -->
+  <div class="text-center">
+    <a href="{% url 'leer' %}" type="submit" class="btn btn-primary">Volver</a>
+  </div>
+</div>
 {% endblock body %}

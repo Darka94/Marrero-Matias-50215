@@ -1,17 +1,50 @@
 {% extends "web/home.html" %}
-{# Cargamos la librería #}
 {% load django_bootstrap5 %}
-{# Widget Tweaks #}
 {% load widget_tweaks %}
-{# Archivos #}
 {% load static %}
 
 {% block body %}
-  <h2>Actualizar Cliente</h2>
-  
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
-  </form>
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+        font-family: 'Roboto', sans-serif; /* Cambiar la fuente a Roboto o cualquier otra fuente deseada */
+    }
+
+    .form-group {
+        text-align: left; /* Alinear los campos del formulario a la izquierda */
+    }
+
+    .form-label {
+        color: #fff; /* Color blanco para las etiquetas de los campos */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Color azul para el botón */
+        border-color: #007bff; /* Color del borde del botón */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Color azul más oscuro al pasar el mouse sobre el botón */
+        border-color: #0056b3; /* Color del borde del botón al pasar el mouse sobre el botón */
+    }
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">Actualizar Cliente</h2>
+      
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group mb-3">
+          <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+          {{ field|add_class:"form-control" }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block">Actualizar Cliente</button>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock body %}

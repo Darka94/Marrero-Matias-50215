@@ -1,0 +1,59 @@
+{% extends "web/home.html" %}
+
+{% block body %}
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+        font-family: 'Roboto', sans-serif; /* Fuente linda */
+    }
+    
+    h1 {
+        text-align: center; /* Centrar el título */
+        font-size: 2.5rem; /* Tamaño grande para el título */
+        margin-bottom: 2.5rem; /* Margen inferior */
+    }
+    
+    form {
+        margin: 0 auto; /* Centrar el formulario horizontalmente */
+        width: 50%; /* Ancho del formulario */
+    }
+    
+    table {
+        width: 100%; /* Ancho completo para la tabla */
+        border-collapse: collapse; /* Colapsar bordes de la tabla */
+        margin-bottom: 1.5rem; /* Margen inferior */
+    }
+    
+    table th, table td {
+        padding: 0.75rem; /* Padding para celdas de la tabla */
+        text-align: left; /* Alineación izquierda para contenido */
+    }
+    
+    input[type="submit"] {
+        display: block; /* Convertir botón en bloque */
+        width: 100%; /* Ancho completo */
+        padding: 0.75rem; /* Padding del botón */
+        margin-top: 1.5rem; /* Margen superior */
+        font-size: 1rem; /* Tamaño de fuente */
+        border: none; /* Eliminar borde */
+        background-color: #007bff; /* Color de fondo del botón */
+        color: #fff; /* Color de texto blanco */
+        cursor: pointer; /* Cursor apuntador */
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #0056b3; /* Cambio de color al pasar el cursor */
+    }
+</style>
+
+<h1 class="mb-5">Avatar</h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Actualizar Avatar">
+</form>
+
+{% endblock body %}

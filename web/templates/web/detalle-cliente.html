@@ -7,13 +7,24 @@
 {# Archivos #}
 {% load static %}
 {% block body %}
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+    }
+</style>
 
+<div class="container py-4">
 <h4>Detalles</h4>
- 
+<div class="row justify-content-center">
+    <div class="col-md-6">
 <p><span class="txt_negrita">Nombre:</span> <br> {{object.nombre}}</p>
 <p><span class="txt_negrita">email:</span> <br> {{object.email}}</p>
-
+</div>
+</div>
 <!-- Botón para volver a la vista principal (Home) -->
-<a href="{% url 'leer-cliente' %}" type="submit" class="btn btn-primary">Volver</a>
+<div class="text-center">
 
+<a href="{% url 'leer-cliente' %}" type="submit" class="btn btn-primary">Volver</a>
+</div>
+</div>
 {% endblock body %}

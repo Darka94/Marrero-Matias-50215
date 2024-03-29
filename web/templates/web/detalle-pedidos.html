@@ -1,19 +1,26 @@
-
 {% extends "web/home.html" %}
-{# Cargamos la librería #}
 {% load django_bootstrap5 %}
-{# Widget Tweaks #}
 {% load widget_tweaks %}
-{# Archivos #}
 {% load static %}
 {% block body %}
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+    }
+</style>
+<div class="container py-4">
+  <h4 class="text-center mb-4">Detalles</h4>
+  
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p><span class="txt_negrita">Cliente:</span><br>{{ object.cliente }}</p>
+      <p><span class="txt_negrita">Fecha:</span><br>{{ object.fecha_pedido }}</p>
+    </div>
+  </div>
 
-<h4>Detalles</h4>
- 
-<p><span class="txt_negrita">Cliente:</span> <br> {{object.cliente}}</p>
-<p><span class="txt_negrita">Fecha:</span> <br> {{object.fecha_pedido}}</p>
-
-<!-- Botón para volver a la vista principal (Home) -->
-<a href="{% url 'leer-pedidos' %}" type="submit" class="btn btn-primary">Volver</a>
-
+  <!-- Botón para volver a la vista principal (Home) -->
+  <div class="text-center">
+    <a href="{% url 'leer-pedidos' %}" class="btn btn-primary">Volver</a>
+  </div>
+</div>
 {% endblock body %}

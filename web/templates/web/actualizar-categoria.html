@@ -1,17 +1,63 @@
 {% extends "web/home.html" %}
-{# Cargamos la librería #}
 {% load django_bootstrap5 %}
-{# Widget Tweaks #}
 {% load widget_tweaks %}
-{# Archivos #}
 {% load static %}
 
 {% block body %}
+<style>
+  body {
+    font-family: 'Arial', sans-serif; /* Fuente agradable */
+    color: #fff; /* Letras blancas */
+  }
+
+  .container {
+    text-align: center; /* Centrar contenido */
+    margin-top: 50px; /* Margen superior */
+  }
+
+  form {
+    width: 50%; /* Ancho del formulario */
+    margin: auto; /* Centrar formulario */
+  }
+
+  label {
+    display: block; /* Mostrar etiquetas en bloque */
+    margin-bottom: 10px; /* Espacio entre etiquetas y campos */
+    font-weight: bold; /* Negrita para etiquetas */
+  }
+
+  input[type="text"] {
+    width: 100%; /* Ancho completo para campos de texto */
+    padding: 10px; /* Espacio interno */
+    margin-bottom: 20px; /* Espacio entre campos */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 5px; /* Bordes redondeados */
+    box-sizing: border-box; /* Tamaño incluyendo el borde */
+  }
+
+  button[type="submit"] {
+    padding: 10px 20px; /* Espacio interno */
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero */
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+  }
+</style>
+
+<div class="container">
   <h2>Actualizar Categoria</h2>
   
   <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Actualizar cateogria</button>
+    <label for="id_nombre">Nombre:</label>
+    {{ form.nombre|add_class:"form-control" }}
+    
+    <button type="submit" class="btn btn-primary">Actualizar categoria</button>
   </form>
+</div>
 {% endblock body %}

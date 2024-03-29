@@ -1,30 +1,33 @@
 {% extends "web/home.html" %}
-{# Cargamos la librería #}
 {% load django_bootstrap5 %}
-{# Widget Tweaks #}
 {% load widget_tweaks %}
-{# Archivos #}
 {% load static %}
 {% block body %}
-<form method="post" enctype="multipart/form-data">
-  
-   
+<style>
+    body {
+        color: #fff; /* Color blanco para todas las letras */
+    }
+</style>
+
+<div class="container py-4">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     
-    <!-- {{ form.as_p }} -->
     <div class="form-group mb-2">
-      <label for="nombre" class="txt_negrita">Nombre</label>
-      {{ form.nombre|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-    </div>
-    <div class="form-group mb-2">
-      <label for="precio" class="txt_negrita">Email</label>
-      {{ form.email|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto --> 
+      <label for="id_nombre" class="txt_negrita">Nombre:</label>
+      {{ form.nombre|add_class:"form-control" }}
     </div>
     
+    <div class="form-group mb-2">
+      <label for="id_email" class="txt_negrita">Email:</label>
+      {{ form.email|add_class:"form-control" }}
+    </div>
     
-    <button href="{ % url 'crear' % }" type="submit" class="btn btn-primary">Aceptar</button>
-    <a href="./" type="submit" class="btn btn-primary">Cancelar</a>
-   
+    <div class="text-center">
+      <button href="{% url 'crear' %}" type="submit" class="btn btn-primary">Aceptar</button>
+      <a href="./" class="btn btn-primary">Cancelar</a>
+    </div>
   </form>
+</div>
+{% endblock body %}
 
-  {% endblock body %}
