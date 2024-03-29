@@ -5,12 +5,6 @@ Proyecto Final CoderHouse Python
 
 
 
-
-
-Proyecto Final CoderHouse Python
-
-
-
 ## Apendice
 
 A continuación se describira el funcionamiento de una aplicación web creada por mi como proyecto final del curso de Python, la misma es una representación de una aplicación de tienda virtual de articulos deportivos orientados a CrossFit
