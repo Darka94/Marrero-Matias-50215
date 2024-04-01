@@ -50,7 +50,8 @@ El usuario puede autenticado puede ingresar en el botón "Perfil" y editar sus d
 - git-clone
 - Pip
 - Python  Python 3.12.2
-Para realizar el Deployment de manera local el usuario deberá ejecutar los siguientes comandos:
+
+- Para realizar el Deployment de manera local el usuario deberá ejecutar los siguientes comandos:
 
 #### Paso 1
 ```bash
